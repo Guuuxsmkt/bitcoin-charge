@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
+
+body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #000; color: white; font-family: 'Ubuntu', sans-serif; overflow: hidden; }
+
+#intro-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: black; z-index: 1000; transition: opacity 1s; }
+#intro-text { font-size: 3rem; color: #f3ba2f; opacity: 0; animation: fadeInOut 4s forwards; }
+#intro-symbol { font-size: 6rem; color: #f3ba2f; position: absolute; opacity: 0; animation: fadeIn 2s forwards 3.5s; }
+
+@keyframes fadeInOut { 0% { opacity: 0; } 40% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+#auth-screen { height: 100vh; display: flex; align-items: center; justify-content: center; }
+.auth-box { background: #111; padding: 30px; border-radius: 10px; border: 1px solid #f3ba2f; text-align: center; width: 300px; }
+input { width: 100%; padding: 10px; margin: 10px 0; background: #222; border: 1px solid #333; color: white; border-radius: 5px; box-sizing: border-box; }
+button { width: 100%; padding: 12px; background: #f3ba2f; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; }
+
+#main-layout { display: flex; height: 100vh; }
+.menu-icon { position: fixed; top: 20px; left: 20px; font-size: 30px; cursor: pointer; color: #f3ba2f; z-index: 100; }
+#side-menu { position: fixed; top: 0; left: -250px; width: 250px; height: 100%; background: #0a0a0a; transition: 0.3s; padding-top: 80px; border-right: 1px solid #333; z-index: 99; }
+#side-menu.open { left: 0; }
+#side-menu li { padding: 15px 20px; list-style: none; cursor: pointer; border-bottom: 1px solid #1a1a1a; }
+
+.satoshi-side { position: absolute; right: 5%; top: 50%; transform: translateY(-50%); text-align: right; width: 40%; pointer-events: none; }
+.btc-big-symbol { font-size: 10rem; color: rgba(243, 186, 47, 0.1); }
+.satoshi-quote { color: #f3ba2f; font-style: italic; }
+
+.content-side { width: 50%; padding: 100px 50px; }
+.section-box { background: #111; padding: 25px; border-radius: 10px; border-left: 4px solid #f3ba2f; }
