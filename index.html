@@ -3,82 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BITCOIN CHARGE</title>
+    <title>Bitcoin Charge - Puzzle & Chat</title>
     <link rel="stylesheet" href="style.css">
+    <script type="module" src="script.js" defer></script>
 </head>
 <body>
 
     <div id="intro-screen">
-        <h1 id="intro-text">BITCOIN CHARGE</h1>
-        <div id="intro-symbol">₿</div>
+        <div class="logo-container">
+            <h1 class="logo-text">BITCOIN<span>CHARGE</span></h1>
+            <p>Conectando ao Puzzle...</p>
+        </div>
     </div>
 
     <div id="auth-screen" style="display: none;">
         <div class="auth-box">
-            <h2>Entre ou se torne membro.</h2>
-            <input type="text" id="reg-user" placeholder="Username">
-            <input type="email" id="reg-email" placeholder="E-mail válido">
-            <input type="password" id="reg-pass" placeholder="Senha de confiança">
-            <button onclick="finalizarRegistro()">Entrar / Registrar</button>
+            <h2>Bem-vindo</h2>
+            <p>Escolha um apelido para o Chat Global</p>
+            <input type="text" id="reg-user" placeholder="Seu nome aqui...">
+            <button onclick="finalizarRegistro()">Entrar no Site</button>
         </div>
     </div>
 
     <div id="main-layout" style="display: none;">
-        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        
+        <header>
+            <div class="menu-btn" onclick="toggleMenu()">☰</div>
+            <div class="user-info">
+                <span id="user-welcome">Usuário</span>
+            </div>
+        </header>
+
         <nav id="side-menu">
-            <ul>
-                <li onclick="mostrarSessao('home')">Início</li>
-                <li onclick="mostrarSessao('miner')">Mineração</li>
-                <li onclick="mostrarSessao('chat')">Chat 24h</li>
-            </ul>
+            <button onclick="mostrarSessao('home')">Início (Puzzles)</button>
+            <button onclick="mostrarSessao('chat')">Chat Global 24h</button>
+            <p style="color: #666; font-size: 12px; margin-top: 20px;">v1.2 - Modo Seguro</p>
         </nav>
 
-        <div class="satoshi-side">
-            <div class="btc-big-symbol">₿</div>
-            <p class="satoshi-quote">
-                "Se você não acredita em mim ou não entende, não tenho tempo para tentar convencê-lo, desculpe."<br>
-                <span>- SATOSHI NAKAMOTO</span>
-            </p>
-        </div>
-
-        <div class="content-side">
-            <div id="home-section" class="section-box">
-                <h2>Bem-vindo, <span id="user-welcome"></span>!</h2>
-                <p>Selecione uma opção no menu lateral para começar.</p>
-            </div>
-
-            <div id="miner-section" class="section-box" style="display: none;">
-                <h2>Mineração de Frações</h2>
-                <label>Escolha sua moeda:</label>
-                <select id="coin-select" onchange="atualizarInterfaceMoeda()">
-                    <option value="BTC">Bitcoin ₿</option>
-                    <option value="BCH">Bitcoin Cash ₿</option>
-                    <option value="SOL">Solana ⚡</option>
-                    <option value="ETH">Ethereum Ξ</option>
-                    <option value="PEPE">Pepe Coin 🐸</option>
-                    <option value="SHIB">Shiba Inu 🐕</option>
-                    <option value="XRP">XRP ✕</option>
-                    <option value="TRX">TRX ₮</option>
-                </select>
-                <div class="stats">
-                    <p>Hashrate: <span id="miner-status">0.00</span> TH/s</p>
-                    <p>Saldo: <span id="saldo-valor">0.00000000</span> <span id="moeda-sigla">BTC</span></p>
-                </div>
-                <button id="btn-mine" onclick="resolverCaptcha()">Resolver Captcha & Minerar</button>
-                <p id="timer-display" style="margin-top: 10px; color: #00ff41;"></p>
-            </div>
-
-            <div id="chat-section" class="section-box" style="display: none;">
-                <h2>Chat Global 24h</h2>
-                <div id="chat-display" style="height: 200px; overflow-y: auto; background: #000; padding: 10px; margin-bottom: 10px; border: 1px solid #333;"></div>
-                <div style="display: flex; gap: 5px;">
-                    <input type="text" id="chat-input" placeholder="Mensagem...">
-                    <button onclick="enviarMensagem()" style="width: auto; padding: 0 15px;">Enviar</button>
+        <section id="home-section">
+            <div class="card">
+                <h2>Puzzles Disponíveis</h2>
+                <p>Resolva o desafio e ganhe recompensas reais.</p>
+                <div id="lista-puzzles">
+                    <button class="puzzle-item" onclick="alert('Em breve: Puzzle 1GSMG...')">
+                        🧩 Puzzle Bitcoin (0.1 BTC)
+                    </button>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <section id="chat-section" style="display: none;">
+            <div class="chat-container">
+                <div id="chat-display"></div>
+                <div class="chat-input-area">
+                    <input type="text" id="chat-input" placeholder="Digite sua mensagem...">
+                    <button onclick="enviarMensagem()">Enviar</button>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <script src="script.js"></script>
 </body>
 </html>
