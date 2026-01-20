@@ -27,7 +27,7 @@ window.onload = () => {
 
 window.finalizarRegistro = () => {
     const user = document.getElementById('reg-user').value;
-    if (!user) return alert("Digite um nome!");
+    if (!user) return alert("Escolha um apelido!");
     dados.username = user;
     localStorage.setItem('btc_charge_data', JSON.stringify(dados));
     entrarNoSite();
@@ -42,19 +42,15 @@ function entrarNoSite() {
 window.toggleMenu = () => document.getElementById('side-menu').classList.toggle('open');
 
 window.mostrarSessao = (tipo) => {
-    // Esconde todas as seções
     const secoes = ['home', 'chat', 'puzzle-main', 'puzzle-resolver', 'puzzle-criar'];
     secoes.forEach(s => {
         const el = document.getElementById(s + '-section');
         if (el) el.style.display = 'none';
     });
-
-    // Mostra a selecionada
     document.getElementById(tipo + '-section').style.display = 'block';
     if (document.getElementById('side-menu').classList.contains('open')) toggleMenu();
 }
 
-// LÓGICA DO CHAT MANTIDA
 window.enviarMensagem = () => {
     const input = document.getElementById('chat-input');
     if(!input.value) return;
@@ -66,7 +62,7 @@ onChildAdded(chatRef, (snapshot) => {
     const msg = snapshot.val();
     const display = document.getElementById('chat-display');
     if (display) {
-        display.innerHTML += `<div><b>${msg.usuario}:</b> ${msg.texto}</div>`;
+        display.innerHTML += `<div style="margin-bottom:5px"><b>${msg.usuario}:</b> ${msg.texto}</div>`;
         display.scrollTop = display.scrollHeight;
     }
 });

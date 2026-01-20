@@ -37,17 +37,22 @@
 
         <section id="home-section">
             <div class="card">
-                <h1>Bem-vindo ao Bitcoin Charge</h1>
+                <h1>Bitcoin Charge</h1>
                 <p>O lugar onde você resolve desafios e ganha recompensas.</p>
+                <br><br>
+                <p class="satoshi-quote" style="font-style: italic; color: #f3ba2f; margin-top: 50px;">
+                    "Se você não acredita em mim ou não entende, eu não tenho tempo para tentar te convencer, desculpe."
+                </p>
+                <p style="font-size: 12px; color: #888;">— Satoshi Nakamoto</p>
             </div>
         </section>
 
         <section id="puzzle-main-section" style="display: none;">
             <div class="card">
                 <h2>O que você deseja fazer?</h2>
-                <div class="puzzle-options">
-                    <button class="btn-puzzle" onclick="mostrarSessao('puzzle-resolver')">Resolver um Puzzle</button>
-                    <button class="btn-puzzle" onclick="mostrarSessao('puzzle-criar')">Criar um Puzzle</button>
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+                    <button style="padding: 15px; background: #f3ba2f; border: none; font-weight: bold; cursor: pointer;" onclick="mostrarSessao('puzzle-resolver')">RESOLVER UM PUZZLE</button>
+                    <button style="padding: 15px; background: #f3ba2f; border: none; font-weight: bold; cursor: pointer;" onclick="mostrarSessao('puzzle-criar')">CRIAR UM PUZZLE</button>
                 </div>
             </div>
         </section>
@@ -55,8 +60,8 @@
         <section id="puzzle-resolver-section" style="display: none;">
             <div class="card">
                 <h2>Puzzles Disponíveis</h2>
-                <div id="lista-puzzles-real">
-                    <p>Carregando puzzles ativos...</p>
+                <div id="lista-puzzles-real" style="margin: 20px 0;">
+                    <p>Nenhum puzzle disponível no momento.</p>
                 </div>
                 <button onclick="mostrarSessao('puzzle-main')">Voltar</button>
             </div>
@@ -65,14 +70,12 @@
         <section id="puzzle-criar-section" style="display: none;">
             <div class="card">
                 <h2>Criar novo Puzzle</h2>
-                <p>Para manutenção e qualidade do Bitcoin Charge, ao criar um Puzzle você paga uma pequena taxa para manutenção do site. [cite: 2026-01-20]</p>
+                <p style="font-size: 14px; margin-bottom: 15px;">Para manutenção e qualidade do Bitcoin Charge, ao criar um Puzzle você paga uma pequena taxa para manutenção do site. [cite: 2026-01-20]</p>
                 
-                <p>Realize o pagamento via nosso QRCODE:</p>
-                <div class="qr-placeholder">
-                    <div style="background: white; padding: 10px; width: 150px; margin: 0 auto; color: black;">[QR CODE AQUI]</div>
-                </div>
+                <p>Pagamento via QRCODE:</p>
+                <div style="background: white; padding: 10px; width: 150px; margin: 15px auto; color: black; font-weight: bold;">[QR CODE AQUI]</div>
 
-                <div class="valores-taxa">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                     <button onclick="alert('Pagar 10$')">10$</button>
                     <button onclick="alert('Pagar 20$')">20$</button>
                     <button onclick="alert('Pagar 50$')">50$</button>
@@ -80,8 +83,8 @@
                 </div>
 
                 <div style="margin-top: 20px;">
-                    <input type="number" id="valor-proprio" placeholder="Valor Próprio">
-                    <button onclick="alert('Aguardando pagamento...')">PAGAR</button>
+                    <input type="number" id="valor-proprio" placeholder="Valor Próprio" style="padding: 10px; width: 60%;">
+                    <button onclick="alert('Aguardando pagamento...')" style="background: #f3ba2f; padding: 10px;">PAGAR</button>
                 </div>
                 <br>
                 <button onclick="mostrarSessao('puzzle-main')">Voltar</button>
@@ -89,11 +92,11 @@
         </section>
 
         <section id="chat-section" style="display: none;">
-            <div class="chat-container">
-                <div id="chat-display"></div>
-                <div class="chat-input-area">
-                    <input type="text" id="chat-input" placeholder="Mensagem...">
-                    <button onclick="enviarMensagem()">Enviar</button>
+            <div class="chat-container" style="background: #222; padding: 15px; border-radius: 10px;">
+                <div id="chat-display" style="height: 300px; overflow-y: auto; text-align: left; margin-bottom: 10px; border-bottom: 1px solid #444;"></div>
+                <div style="display: flex; gap: 5px;">
+                    <input type="text" id="chat-input" placeholder="Mensagem..." style="flex: 1; padding: 10px;">
+                    <button onclick="enviarMensagem()" style="background: #f3ba2f; padding: 10px; border: none;">Enviar</button>
                 </div>
             </div>
         </section>
