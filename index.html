@@ -18,8 +18,8 @@
     <div id="auth-screen" style="display: none;">
         <div class="auth-box">
             <h2>Bem-vindo</h2>
-            <input type="text" id="reg-user" placeholder="Seu apelido...">
-            <button onclick="finalizarRegistro()">Entrar</button>
+            <input type="text" id="reg-user" placeholder="Escolha seu apelido...">
+            <button onclick="finalizarRegistro()">Acessar</button>
         </div>
     </div>
 
@@ -35,68 +35,71 @@
             <button onclick="mostrarSessao('chat')">Chat Global</button>
         </nav>
 
-        <section id="home-section">
+        <section id="home-section" class="active-section">
             <div class="card">
-                <h1>Bitcoin Charge</h1>
-                <p>O lugar onde você resolve desafios e ganha recompensas.</p>
-                <br><br>
-                <p class="satoshi-quote" style="font-style: italic; color: #f3ba2f; margin-top: 50px;">
-                    "Se você não acredita em mim ou não entende, eu não tenho tempo para tentar te convencer, desculpe."
-                </p>
-                <p style="font-size: 12px; color: #888;">— Satoshi Nakamoto</p>
+                <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Bitcoin Charge</h1>
+                <p style="font-size: 1.1rem; color: #ccc;">O lugar onde você resolve desafios e ganha recompensas.</p>
+                
+                <div class="quote-container" style="margin-top: 80px;">
+                    <p style="font-style: italic; color: #f3ba2f; font-size: 1.2rem; line-height: 1.6;">
+                        "Se você não acredita em mim ou não entende, eu não tenho tempo para tentar te convencer, desculpe."
+                    </p>
+                    <p style="font-size: 0.9rem; color: #888; margin-top: 10px;">— Satoshi Nakamoto</p>
+                </div>
             </div>
         </section>
 
         <section id="puzzle-main-section" style="display: none;">
             <div class="card">
-                <h2>O que você deseja fazer?</h2>
-                <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
-                    <button style="padding: 15px; background: #f3ba2f; border: none; font-weight: bold; cursor: pointer;" onclick="mostrarSessao('puzzle-resolver')">RESOLVER UM PUZZLE</button>
-                    <button style="padding: 15px; background: #f3ba2f; border: none; font-weight: bold; cursor: pointer;" onclick="mostrarSessao('puzzle-criar')">CRIAR UM PUZZLE</button>
+                <h2 style="margin-bottom: 20px;">Área de Puzzles</h2>
+                <p>O que você deseja fazer?</p>
+                <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px;">
+                    <button class="action-btn" onclick="mostrarSessao('puzzle-resolver')" style="padding: 20px; background: #f3ba2f; color: #000; border: none; font-weight: bold; cursor: pointer; border-radius: 5px;">RESOLVER UM PUZZLE</button>
+                    <button class="action-btn" onclick="mostrarSessao('puzzle-criar')" style="padding: 20px; background: #f3ba2f; color: #000; border: none; font-weight: bold; cursor: pointer; border-radius: 5px;">CRIAR UM PUZZLE</button>
                 </div>
             </div>
         </section>
 
         <section id="puzzle-resolver-section" style="display: none;">
             <div class="card">
-                <h2>Puzzles Disponíveis</h2>
-                <div id="lista-puzzles-real" style="margin: 20px 0;">
-                    <p>Nenhum puzzle disponível no momento.</p>
+                <h2>Puzzles Ativos</h2>
+                <div id="lista-puzzles-real" style="padding: 20px 0;">
+                    <p style="color: #888;">Procurando puzzles na rede...</p>
                 </div>
-                <button onclick="mostrarSessao('puzzle-main')">Voltar</button>
+                <button onclick="mostrarSessao('puzzle-main')" style="background: transparent; color: #f3ba2f; border: 1px solid #f3ba2f; padding: 10px 20px; cursor: pointer;">Voltar</button>
             </div>
         </section>
 
         <section id="puzzle-criar-section" style="display: none;">
             <div class="card">
-                <h2>Criar novo Puzzle</h2>
-                <p style="font-size: 14px; margin-bottom: 15px;">Para manutenção e qualidade do Bitcoin Charge, ao criar um Puzzle você paga uma pequena taxa para manutenção do site. [cite: 2026-01-20]</p>
+                <h2>Novo Puzzle</h2>
+                <p style="margin-bottom: 20px; font-size: 0.95rem;">Para manutenção e qualidade do Bitcoin Charge, ao criar um Puzzle você paga uma pequena taxa para manutenção do site. [cite: 2026-01-20]</p>
                 
-                <p>Pagamento via QRCODE:</p>
-                <div style="background: white; padding: 10px; width: 150px; margin: 15px auto; color: black; font-weight: bold;">[QR CODE AQUI]</div>
+                <p style="color: #f3ba2f; font-weight: bold;">PAGAMENTO VIA QRCODE</p>
+                <div style="background: white; padding: 10px; width: 140px; height: 140px; margin: 15px auto; display: flex; align-items: center; justify-content: center; color: #000; font-weight: bold; border-radius: 5px;">[QR CODE]</div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <button onclick="alert('Pagar 10$')">10$</button>
-                    <button onclick="alert('Pagar 20$')">20$</button>
-                    <button onclick="alert('Pagar 50$')">50$</button>
-                    <button onclick="alert('Pagar 100$')">100$</button>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+                    <button class="val-btn" onclick="alert('Taxa: 10$')">10$</button>
+                    <button class="val-btn" onclick="alert('Taxa: 20$')">20$</button>
+                    <button class="val-btn" onclick="alert('Taxa: 50$')">50$</button>
+                    <button class="val-btn" onclick="alert('Taxa: 100$')">100$</button>
                 </div>
 
-                <div style="margin-top: 20px;">
-                    <input type="number" id="valor-proprio" placeholder="Valor Próprio" style="padding: 10px; width: 60%;">
-                    <button onclick="alert('Aguardando pagamento...')" style="background: #f3ba2f; padding: 10px;">PAGAR</button>
+                <div style="border-top: 1px solid #333; pt-20">
+                    <input type="number" id="valor-proprio" placeholder="Valor Personalizado" style="padding: 12px; width: 50%; background: #111; border: 1px solid #333; color: white;">
+                    <button onclick="alert('Aguardando confirmação...')" style="padding: 12px; background: #f3ba2f; border: none; font-weight: bold; cursor: pointer;">PAGAR</button>
                 </div>
                 <br>
-                <button onclick="mostrarSessao('puzzle-main')">Voltar</button>
+                <button onclick="mostrarSessao('puzzle-main')" style="background: transparent; color: #f3ba2f; border: none; cursor: pointer;">Voltar</button>
             </div>
         </section>
 
         <section id="chat-section" style="display: none;">
-            <div class="chat-container" style="background: #222; padding: 15px; border-radius: 10px;">
-                <div id="chat-display" style="height: 300px; overflow-y: auto; text-align: left; margin-bottom: 10px; border-bottom: 1px solid #444;"></div>
-                <div style="display: flex; gap: 5px;">
-                    <input type="text" id="chat-input" placeholder="Mensagem..." style="flex: 1; padding: 10px;">
-                    <button onclick="enviarMensagem()" style="background: #f3ba2f; padding: 10px; border: none;">Enviar</button>
+            <div class="chat-container">
+                <div id="chat-display"></div>
+                <div class="chat-input-area">
+                    <input type="text" id="chat-input" placeholder="Diga algo...">
+                    <button onclick="enviarMensagem()">Enviar</button>
                 </div>
             </div>
         </section>
