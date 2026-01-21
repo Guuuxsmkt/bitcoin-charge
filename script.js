@@ -1,17 +1,3 @@
-// CONFIGURAÇÃO FIREBASE (MANTIDA)
-const firebaseConfig = {
-    apiKey: "AIzaSyB8zHpjVzG-mWnSTFiaWhXwfSmzdgHasPc",
-    authDomain: "bitcoinchargechat.firebaseapp.com",
-    databaseURL: "https://bitcoinchargechat-default-rtdb.firebaseio.com",
-    projectId: "bitcoinchargechat",
-    storageBucket: "bitcoinchargechat.firebasestorage.app",
-    messagingSenderId: "120515915221",
-    appId: "1:120515915221:web:358830ce033f143ba8615c"
-};
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-const app = initializeApp(firebaseConfig);
-
 let dados = JSON.parse(localStorage.getItem('btc_charge_data')) || { username: "" };
 
 window.onload = () => {
@@ -19,30 +5,34 @@ window.onload = () => {
     const logo = document.getElementById('intro-logo');
     const screen = document.getElementById('intro-screen');
 
-    // Sequência de Animação: Texto sumindo -> Logo aparecendo
+    // 1. Texto some após 2 segundos
     setTimeout(() => {
-        text.style.opacity = '0'; // Texto some
+        text.style.opacity = '0';
+        
+        // 2. Logo aparece após o texto sumir
         setTimeout(() => {
             text.style.display = 'none';
             logo.style.display = 'block';
-            setTimeout(() => { logo.style.opacity = '1'; }, 100); // Logo aparece
-        }, 2000);
+            setTimeout(() => { logo.style.opacity = '1'; }, 50);
+            
+            // 3. A tela inteira some após o logo brilhar por 3 segundos
+            setTimeout(() => {
+                screen.style.opacity = '0';
+                setTimeout(() => {
+                    screen.style.display = 'none';
+                    document.body.style.overflow = 'auto'; // Libera o clique no site
+                    
+                    if (dados.username !== "") entrarNoSite();
+                    else document.getElementById('auth-screen').style.display = 'flex';
+                }, 1000);
+            }, 3000);
+        }, 1500);
     }, 2000);
-
-    // Finaliza animação e vai para login/main
-    setTimeout(() => {
-        screen.style.opacity = '0';
-        setTimeout(() => {
-            screen.style.display = 'none';
-            if (dados.username !== "") entrarNoSite();
-            else document.getElementById('auth-screen').style.display = 'flex';
-        }, 2000);
-    }, 7000);
 };
 
 window.finalizarRegistro = () => {
     const user = document.getElementById('user-nick').value;
-    if (!user) return alert("Por favor, preencha o seu username.");
+    if (!user) return alert("Digite seu Username");
     
     dados.username = user;
     if (document.getElementById('remember-me').checked) {
@@ -54,7 +44,6 @@ window.finalizarRegistro = () => {
 function entrarNoSite() {
     document.getElementById('auth-screen').style.display = 'none';
     document.getElementById('main-layout').style.display = 'block';
-    document.getElementById('user-display').innerText = dados.username;
 }
 
 window.toggleMenu = () => {
