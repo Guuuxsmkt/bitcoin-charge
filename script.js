@@ -5,36 +5,37 @@ window.onload = () => {
     const logo = document.getElementById('intro-logo');
     const screen = document.getElementById('intro-screen');
 
-    // 1. Texto some após 2 segundos
+    // 1. Texto Inicial
     setTimeout(() => {
         text.style.opacity = '0';
         
-        // 2. Logo aparece após o texto sumir
+        // 2. Troca para o Logo Menor
         setTimeout(() => {
             text.style.display = 'none';
             logo.style.display = 'block';
             setTimeout(() => { logo.style.opacity = '1'; }, 50);
             
-            // 3. A tela inteira some após o logo brilhar por 3 segundos
+            // 3. Entra no site
             setTimeout(() => {
                 screen.style.opacity = '0';
                 setTimeout(() => {
                     screen.style.display = 'none';
-                    document.body.style.overflow = 'auto'; // Libera o clique no site
-                    
                     if (dados.username !== "") entrarNoSite();
                     else document.getElementById('auth-screen').style.display = 'flex';
                 }, 1000);
-            }, 3000);
+            }, 2500);
         }, 1500);
     }, 2000);
 };
 
 window.finalizarRegistro = () => {
-    const user = document.getElementById('user-nick').value;
-    if (!user) return alert("Digite seu Username");
+    const email = document.getElementById('user-email').value;
+    const nick = document.getElementById('user-nick').value;
+    const pass = document.getElementById('user-pass').value;
+
+    if (!email || !nick || !pass) return alert("Por favor, preencha todos os campos!");
     
-    dados.username = user;
+    dados.username = nick;
     if (document.getElementById('remember-me').checked) {
         localStorage.setItem('btc_charge_data', JSON.stringify(dados));
     }

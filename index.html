@@ -7,49 +7,51 @@
     <link rel="stylesheet" href="style.css">
     <script type="module" src="script.js" defer></script>
 </head>
-<body style="background-color: black; color: white; margin: 0; overflow: hidden;">
+<body style="background-color: black; color: white; margin: 0; overflow: hidden; font-family: sans-serif;">
 
-    <div id="intro-screen" style="position: fixed; width: 100%; height: 100%; background: black; display: flex; justify-content: center; align-items: center; z-index: 1000;">
+    <div id="intro-screen" style="position: fixed; width: 100%; height: 100%; background: black; display: flex; justify-content: center; align-items: center; z-index: 1000; transition: opacity 1.5s;">
         <div id="intro-content" style="text-align: center;">
             <h1 id="intro-text" style="color: #f3ba2f; font-size: 3rem; transition: opacity 1.5s;">BITCOIN CHARGE</h1>
-            
             <div id="intro-logo" style="display: none; opacity: 0; transition: opacity 1.5s;">
-                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" width="120" alt="Bitcoin Logo">
+                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" width="80" alt="Bitcoin Logo">
             </div>
         </div>
     </div>
 
     <div id="auth-screen" style="display: none; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
-        <div style="width: 300px; text-align: center; background: #111; padding: 30px; border-radius: 10px;">
-            <h2 style="color: #f3ba2f;">Acessar</h2>
-            <input type="email" id="user-email" placeholder="E-mail válido" style="width: 100%; padding: 10px; margin-bottom: 10px;">
-            <input type="text" id="user-nick" placeholder="Username" style="width: 100%; padding: 10px; margin-bottom: 10px;">
-            <input type="password" id="user-pass" placeholder="Senha" style="width: 100%; padding: 10px; margin-bottom: 10px;">
-            <div style="margin-bottom: 15px; font-size: 14px;">
-                <input type="checkbox" id="remember-me"> <label for="remember-me">Me relembre</label>
+        <div style="width: 320px; text-align: center; background: #111; padding: 40px; border-radius: 15px; border: 1px solid #333;">
+            <h2 style="color: #f3ba2f; margin-bottom: 25px;">Acessar Conta</h2>
+            
+            <input type="email" id="user-email" placeholder="E-mail válido" style="width: 100%; padding: 12px; margin-bottom: 15px; background: #222; border: 1px solid #444; color: white; border-radius: 5px;">
+            <input type="text" id="user-nick" placeholder="User" style="width: 100%; padding: 12px; margin-bottom: 15px; background: #222; border: 1px solid #444; color: white; border-radius: 5px;">
+            <input type="password" id="user-pass" placeholder="Senha" style="width: 100%; padding: 12px; margin-bottom: 15px; background: #222; border: 1px solid #444; color: white; border-radius: 5px;">
+            
+            <div style="margin-bottom: 20px; text-align: left; font-size: 13px; color: #aaa;">
+                <input type="checkbox" id="remember-me"> <label for="remember-me">Me relembra nesse dispositivo</label>
             </div>
-            <button onclick="finalizarRegistro()" style="width: 100%; padding: 12px; background: #f3ba2f; border: none; font-weight: bold; cursor: pointer;">ENTRAR / REGISTRAR</button>
+
+            <button onclick="finalizarRegistro()" style="width: 100%; padding: 15px; background: #f3ba2f; border: none; font-weight: bold; color: black; cursor: pointer; border-radius: 5px; font-size: 1rem;">JÁ POSSUO CONTA / ENTRAR</button>
         </div>
     </div>
 
     <div id="main-layout" style="display: none; width: 100%; height: 100vh; position: relative;">
-        <header style="padding: 20px; z-index: 10; position: absolute;">
-            <div onclick="toggleMenu()" style="cursor: pointer; font-size: 24px; color: #f3ba2f;">☰ Menu</div>
+        <header style="padding: 20px; z-index: 10; position: absolute; width: 100%; box-sizing: border-box;">
+            <div onclick="toggleMenu()" style="cursor: pointer; font-size: 24px; color: #f3ba2f; display: inline-block;">☰ Menu</div>
         </header>
 
-        <nav id="side-menu" style="position: fixed; left: -250px; width: 200px; height: 100%; background: #111; transition: 0.5s; z-index: 100; padding: 60px 20px;">
-            <button onclick="mostrarSessao('home')" style="color: white; background: none; border: none; display: block; margin-bottom: 20px; cursor: pointer;">Início</button>
-            <button onclick="mostrarSessao('puzzle')" style="color: white; background: none; border: none; display: block; cursor: pointer;">Puzzles</button>
+        <nav id="side-menu" style="position: fixed; left: -250px; width: 220px; height: 100%; background: #111; transition: 0.5s; z-index: 100; padding: 80px 20px; border-right: 1px solid #333;">
+            <button onclick="mostrarSessao('home')" style="color: white; background: none; border: none; display: block; margin-bottom: 25px; cursor: pointer; font-size: 1.1rem; text-align: left; width: 100%;">Início</button>
+            <button onclick="mostrarSessao('puzzle')" style="color: white; background: none; border: none; display: block; cursor: pointer; font-size: 1.1rem; text-align: left; width: 100%;">Puzzles</button>
         </nav>
 
-        <div id="home-section" style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; padding: 60px;">
-            <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" style="position: absolute; right: -40px; top: 10%; height: 80%; opacity: 0.1; pointer-events: none;">
+        <div id="home-section" style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; padding: 80px; box-sizing: border-box;">
+            <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" style="position: absolute; right: 20px; top: 15%; height: 50%; opacity: 0.08; pointer-events: none;">
             
-            <div style="max-width: 500px; text-align: right; z-index: 5;">
-                <p style="color: #f3ba2f; font-style: italic; font-size: 1.6rem;">
+            <div style="max-width: 450px; text-align: right; z-index: 5;">
+                <p style="color: #f3ba2f; font-style: italic; font-size: 1.4rem; line-height: 1.5; text-shadow: 1px 1px 5px rgba(0,0,0,0.5);">
                     "Se você não acredita em mim ou não entende, eu não tenho tempo para tentar te convencer, desculpe."
                 </p>
-                <span style="color: #888;">— Satoshi Nakamoto</span>
+                <span style="color: #666; font-size: 0.9rem; letter-spacing: 1px;">— Satoshi Nakamoto</span>
             </div>
         </div>
     </div>
