@@ -20,30 +20,31 @@
     </nav>
 
     <div id="tela-criacao" class="container-puzzle">
-        <h2>🚀 Lançar Desafio</h2>
+        <h2>Criar Novo Puzzle</h2>
         <input type="text" id="nome-puzzle" placeholder="Nome do Puzzle (Ex: Enigma de Satoshi)">
-        <input type="number" id="recompensa-puzzle" step="0.00000001" placeholder="Valor da Recompensa (Ex: 0.1)">
+        <input type="number" id="recompensa-puzzle" placeholder="Recompensa (Ex: 0.1 BTC)">
         
         <select id="nivel-puzzle">
-            <option value="Iniciante">Nível: Iniciante (Verde)</option>
-            <option value="Médio">Nível: Médio (Amarelo)</option>
-            <option value="Difícil">Nível: Difícil (Vermelho)</option>
+            <option value="Iniciante">Iniciante</option>
+            <option value="Médio">Médio</option>
+            <option value="Difícil">Difícil</option>
         </select>
         
-        <textarea id="dicas-gratis-input" placeholder="Dicas 1 a 5 (Gratuitas para todos)..."></textarea>
-        <textarea id="dicas-pagas-input" placeholder="Dicas 6 a 10 (Secretas/Pagas)..."></textarea>
+        <p class="label-dica">Dicas Gratuitas (1 a 5):</p>
+        <textarea id="dicas-gratis-input" placeholder="Esta dica será gratuita para todos..."></textarea>
         
-        <div class="disclaimer-vermelho">
-            <strong>AVISO:</strong> Nós da Bitcoin Charge não somos responsáveis pelos puzzles criados, ele é de totalmente responsabilidade do idealizador do play.
+        <p class="label-dica">Dicas Pagas (6 a 10):</p>
+        <textarea id="dicas-pagas-input" placeholder="Dicas secretas que serão reveladas após o pagamento..."></textarea>
+        
+        <div class="aviso-red">
+            Aviso: Nós da Bitcoin Charge não somos responsáveis pelos puzzles criados, ele é de totalmente responsabilidade do idealizador do play. [cite: 2026-01-21]
         </div>
         
-        <button class="btn-lancar" onclick="prepararPagamento()">Próximo: Escolher Moeda</button>
+        <button class="btn-lancar" onclick="prepararPagamento()">Próximo: Pagamento</button>
     </div>
 
     <div id="tela-pagamento" class="container-puzzle" style="display: none;">
-        <h2>Forma de Pagamento</h2>
-        <p style="font-size: 11px; color: #f7931a;">Bitcoin tem a menor taxa (1.5%)!</p>
-        
+        <h2>Escolha a Moeda</h2>
         <div class="grid-moedas">
             <button class="btn-moeda" onclick="selecionarMoeda('Bitcoin')">₿ Bitcoin</button>
             <button class="btn-moeda" onclick="selecionarMoeda('Solana')">◎ Solana</button>
@@ -51,7 +52,18 @@
             <button class="btn-moeda" onclick="selecionarMoeda('TRX')">💎 TRX</button>
         </div>
 
-        <div id="box-pagamento-detalhes" style="display: none; margin-top: 20px; background: #1a1a1a; padding: 15px; border-radius: 10px; border: 1px solid #f7931a;">
-            <p>Pagar taxa em <span id="moeda-nome"></span>:</p>
-            <h3 style="color: #f7931a;"><span id="valor-taxa-display">0.00</span> <span id="moeda-simbolo"></span></h3>
-            <code id="carteira-exibida" style="font-size: 10px; color: #00ff00; word-break: break-all;">bc1q2zvuafqplffeu5uk
+        <div id="box-pagamento" style="display: none; margin-top: 20px; border: 1px solid #f7931a; padding: 15px; border-radius: 8px;">
+            <p>Taxa (1.5%): <strong id="valor-taxa-display" style="color:#f7931a;"></strong> <span id="moeda-simbolo"></span></p>
+            <code id="carteira-exibida" style="font-size: 10px; display: block; margin: 10px 0;">bc1q2zvuafqplffeu5ukfudnuugf3l0l5kc2a8ue6j</code>
+            <button class="btn-lancar" onclick="confirmarELancar()">Confirmar Pagamento</button>
+        </div>
+    </div>
+
+    <div id="tela-vitrine" class="container-puzzle" style="display: none;">
+        <h2>Vitrine de Puzzles</h2>
+        <div id="lista-puzzles-real"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
