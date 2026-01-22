@@ -3,70 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitcoin Charge</title>
+    <title>Bitcoin Charge - Oficial</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
 </head>
-<body style="background-color: black; color: white; margin: 0; overflow: hidden; font-family: sans-serif;">
+<body>
 
-    <div id="intro-screen" style="position: fixed; width: 100%; height: 100%; background: black; display: flex; justify-content: center; align-items: center; z-index: 1000; transition: opacity 1s;">
-        <div id="intro-content" style="text-align: center;">
-            <h1 id="intro-text" style="color: #f3ba2f; font-size: 3rem; transition: opacity 1s;">BITCOIN CHARGE</h1>
-            <div id="intro-logo" style="display: none; opacity: 0; transition: opacity 1s;">
-                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" width="80" alt="Bitcoin Logo">
-            </div>
+    <nav class="menu-superior">
+        <div class="logo">₿ Bitcoin Charge</div>
+        <div class="links">
+            <button onclick="mostrarTela('tela-criacao')">Criar Puzzle</button>
+            <button onclick="mostrarTela('tela-vitrine')">Jogar / Vitrine</button>
         </div>
+    </nav>
+
+    <div id="tela-criacao" class="container-puzzle">
+        <h2>🚀 Lançar Desafio</h2>
+        <input type="text" id="nome-puzzle" placeholder="Nome do Puzzle (Ex: Enigma de Satoshi)">
+        <input type="number" id="recompensa-puzzle" step="0.00000001" placeholder="Valor da Recompensa (Ex: 0.1)">
+        
+        <select id="nivel-puzzle">
+            <option value="Iniciante">Nível: Iniciante (Verde)</option>
+            <option value="Médio">Nível: Médio (Amarelo)</option>
+            <option value="Difícil">Nível: Difícil (Vermelho)</option>
+        </select>
+        
+        <textarea id="dicas-gratis-input" placeholder="Dicas 1 a 5 (Gratuitas para todos)..."></textarea>
+        <textarea id="dicas-pagas-input" placeholder="Dicas 6 a 10 (Secretas/Pagas)..."></textarea>
+        
+        <div class="disclaimer-vermelho">
+            <strong>AVISO:</strong> Nós da Bitcoin Charge não somos responsáveis pelos puzzles criados, ele é de totalmente responsabilidade do idealizador do play.
+        </div>
+        
+        <button class="btn-lancar" onclick="prepararPagamento()">Próximo: Escolher Moeda</button>
     </div>
 
-    <div id="auth-screen" style="display: none; position: fixed; width: 100%; height: 100%; background: black; flex-direction: column; justify-content: center; align-items: center; z-index: 900;">
-        <div style="width: 300px; text-align: center; background: #111; padding: 30px; border-radius: 15px; border: 1px solid #333;">
-            <h2 style="color: #f3ba2f; margin-bottom: 20px;">Acessar</h2>
-            <input type="email" id="email" placeholder="E-mail" style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; border: 1px solid #444; color: white; border-radius: 5px;">
-            <input type="text" id="user" placeholder="Usuário" style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; border: 1px solid #444; color: white; border-radius: 5px;">
-            <input type="password" id="pass" placeholder="Senha" style="width: 100%; padding: 10px; margin-bottom: 15px; background: #222; border: 1px solid #444; color: white; border-radius: 5px;">
-            <button onclick="realizarLogin()" style="width: 100%; padding: 12px; background: #f3ba2f; border: none; font-weight: bold; cursor: pointer; border-radius: 5px;">ENTRAR NO SITE</button>
+    <div id="tela-pagamento" class="container-puzzle" style="display: none;">
+        <h2>Forma de Pagamento</h2>
+        <p style="font-size: 11px; color: #f7931a;">Bitcoin tem a menor taxa (1.5%)!</p>
+        
+        <div class="grid-moedas">
+            <button class="btn-moeda" onclick="selecionarMoeda('Bitcoin')">₿ Bitcoin</button>
+            <button class="btn-moeda" onclick="selecionarMoeda('Solana')">◎ Solana</button>
+            <button class="btn-moeda" onclick="selecionarMoeda('Ethereum')">Ξ Ethereum</button>
+            <button class="btn-moeda" onclick="selecionarMoeda('TRX')">💎 TRX</button>
         </div>
-    </div>
 
-    <div id="main-layout" style="display: none; width: 100%; height: 100vh;">
-        <header style="padding: 20px; position: absolute; width: 100%; z-index: 10;">
-            <div onclick="toggleMenu()" style="cursor: pointer; font-size: 24px; color: #f3ba2f;">☰ Menu</div>
-        </header>
-
-        <nav id="side-menu" style="position: fixed; left: -250px; width: 220px; height: 100%; background: #111; transition: 0.5s; z-index: 100; padding: 80px 20px; border-right: 1px solid #333;">
-            <p onclick="irPara('home')" style="cursor:pointer; margin-bottom:20px; font-size:1.1rem;">Início</p>
-            <p onclick="irPara('chat')" style="cursor:pointer; margin-bottom:20px; font-size:1.1rem;">Chat 24h</p>
-            <p onclick="irPara('puzzle')" style="cursor:pointer; margin-bottom:20px; font-size:1.1rem;">Puzzles</p>
-            
-            <a href="https://wa.me/5519991234567" target="_blank" style="text-decoration:none; color:#25d366; position:absolute; bottom:30px; font-size:0.9rem;">
-                🟢 Patrocinar Site (WhatsApp)
-            </a>
-        </nav>
-
-        <div id="content" style="width:100%; height:100%;">
-            <section id="sec-home" style="display:flex; width:100%; height:100%; flex-direction:column; justify-content:flex-end; align-items:flex-end; padding:60px; box-sizing:border-box;">
-                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" style="position:absolute; right:20px; top:15%; height:50%; opacity:0.08;">
-                <div style="max-width:400px; text-align:right;">
-                    <p style="color:#f3ba2f; font-style:italic; font-size:1.3rem;">"Se você não acredita em mim ou não entende, eu não tenho tempo para tentar te convencer, desculpe."</p>
-                    <span style="color:#666;">— Satoshi Nakamoto</span>
-                </div>
-            </section>
-
-            <section id="sec-chat" style="display:none; padding:100px 40px; text-align:center;">
-                <h2 style="color:#f3ba2f;">Chat 24h</h2>
-                <div id="chat-box" style="height:300px; background:#111; border:1px solid #333; margin-bottom:10px; overflow-y:auto; padding:10px; text-align:left;">
-                    <p><b style="color:#f3ba2f;">Sistema:</b> Bem-vindo ao chat!</p>
-                </div>
-                <input type="text" id="msg" style="width:70%; padding:10px; background:#222; color:white; border:1px solid #333;">
-                <button onclick="alert('Mensagem enviada!')" style="padding:10px; background:#f3ba2f; border:none; font-weight:bold;">Enviar</button>
-            </section>
-
-            <section id="sec-puzzle" style="display:none; padding:100px 40px; text-align:center;">
-                <h2 style="color:#f3ba2f;">Puzzles</h2>
-                <p>O primeiro Puzzle será liberado em breve.</p>
-                <button onclick="irPara('home')" style="padding:10px 20px; background:none; border:1px solid #f3ba2f; color:white;">Voltar</button>
-            </section>
-        </div>
-    </div>
-</body>
-</html>
+        <div id="box-pagamento-detalhes" style="display: none; margin-top: 20px; background: #1a1a1a; padding: 15px; border-radius: 10px; border: 1px solid #f7931a;">
+            <p>Pagar taxa em <span id="moeda-nome"></span>:</p>
+            <h3 style="color: #f7931a;"><span id="valor-taxa-display">0.00</span> <span id="moeda-simbolo"></span></h3>
+            <code id="carteira-exibida" style="font-size: 10px; color: #00ff00; word-break: break-all;">bc1q2zvuafqplffeu5uk
