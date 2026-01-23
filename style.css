@@ -1,10 +1,61 @@
-body { background-color: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 0; }
-.menu-superior { background: #1a1a1a; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f7931a; }
-.container-puzzle { max-width: 400px; margin: 30px auto; padding: 20px; background: #111; border: 1px solid #333; border-radius: 12px; text-align: center; }
-input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; border-radius: 6px; border: 1px solid #444; background: #222; color: #fff; box-sizing: border-box; }
-textarea { height: 80px; resize: none; }
-.label-dica { text-align: left; font-size: 12px; color: #f7931a; margin: 5px 0 0 0; }
-.aviso-red { background: #600; color: #fff; padding: 10px; font-size: 11px; border-radius: 5px; margin: 15px 0; text-align: left; }
-.btn-lancar { width: 100%; background: #f7931a; color: #000; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-.grid-moedas { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-.btn-moeda { background: #222; color: #fff; border: 1px solid #444; padding: 10px; border-radius: 5px; cursor: pointer; }
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #000; color: #fff; font-family: 'Ubuntu', sans-serif; overflow: hidden; }
+
+/* Animação Inicial */
+#intro-screen { height: 100vh; display: flex; justify-content: center; align-items: center; background: #000; position: fixed; width: 100%; z-index: 999; }
+.fade-in { animation: fadeInOut 4s forwards; font-size: 3rem; letter-spacing: 5px; color: #F7931A; }
+
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+}
+
+/* Layout Principal */
+#main-site { display: flex; height: 100vh; }
+
+.sidebar { width: 250px; background: #0a0a0a; border-right: 1px solid #333; display: flex; flex-direction: column; padding: 20px; }
+.sidebar nav button { background: none; border: 1px solid #F7931A; color: #F7931A; padding: 15px; margin: 10px 0; cursor: pointer; transition: 0.3s; font-weight: bold; }
+.sidebar nav button:hover { background: #F7931A; color: #000; }
+
+.content { flex: 1; padding: 40px; display: flex; justify-content: center; align-items: center; position: relative; }
+
+/* Estilo BTC */
+.btc-icon { font-size: 120px; color: #F7931A; margin-bottom: 20px; display: block; }
+.nakamoto-quote { color: #F7931A; font-style: italic; max-width: 400px; font-size: 14px; margin-bottom: 30px; }
+
+#chat-box { height: 300px; width: 400px; background: #050505; border: 1px solid #333; padding: 10px; overflow-y: auto; text-align: left; }
+.chat-input-area { margin-top: 10px; display: flex; }
+input { background: #000; border: 1px solid #333; color: #fff; padding: 10px; width: 100%; }
+.btn-donate { background: #F7931A; color: #000; border: none; padding: 20px; width: 100%; font-weight: bold; cursor: pointer; } /* Efeito de Brilho no Símbolo BTC */
+.btc-icon {
+    font-size: 120px;
+    color: #F7931A;
+    margin-bottom: 20px;
+    display: block;
+    transition: all 0.5s ease; /* Transição suave */
+    cursor: pointer;
+    text-shadow: 0 0 10px rgba(247, 147, 26, 0); /* Brilho desligado */
+}
+
+.btc-icon:hover {
+    color: #ffab40; /* Cor um pouco mais clara ao passar o mouse */
+    text-shadow: 0 0 30px #F7931A, 0 0 60px #F7931A; /* Efeito Neon/Glow */
+    transform: scale(1.05); /* Pulsa levemente para frente */
+}
+
+/* Ajuste de respiro para o Chat e Input */
+.chat-input-area {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    padding-bottom: 20px; /* Evita colar na barra do Windows como vimos na foto */
+}
+
+#chat-box {
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: rgba(10, 10, 10, 0.9);
+}

@@ -1,69 +1,23 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitcoin Charge - Oficial</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
-</head>
-<body>
-
-    <nav class="menu-superior">
-        <div class="logo">₿ Bitcoin Charge</div>
-        <div class="links">
-            <button onclick="mostrarTela('tela-criacao')">Criar Puzzle</button>
-            <button onclick="mostrarTela('tela-vitrine')">Jogar / Vitrine</button>
-        </div>
-    </nav>
-
-    <div id="tela-criacao" class="container-puzzle">
-        <h2>Criar Novo Puzzle</h2>
-        <input type="text" id="nome-puzzle" placeholder="Nome do Puzzle (Ex: Enigma de Satoshi)">
-        <input type="number" id="recompensa-puzzle" placeholder="Recompensa (Ex: 0.1 BTC)">
-        
-        <select id="nivel-puzzle">
-            <option value="Iniciante">Iniciante</option>
-            <option value="Médio">Médio</option>
-            <option value="Difícil">Difícil</option>
-        </select>
-        
-        <p class="label-dica">Dicas Gratuitas (1 a 5):</p>
-        <textarea id="dicas-gratis-input" placeholder="Esta dica será gratuita para todos..."></textarea>
-        
-        <p class="label-dica">Dicas Pagas (6 a 10):</p>
-        <textarea id="dicas-pagas-input" placeholder="Dicas secretas que serão reveladas após o pagamento..."></textarea>
-        
-        <div class="aviso-red">
-            Aviso: Nós da Bitcoin Charge não somos responsáveis pelos puzzles criados, ele é de totalmente responsabilidade do idealizador do play. [cite: 2026-01-21]
-        </div>
-        
-        <button class="btn-lancar" onclick="prepararPagamento()">Próximo: Pagamento</button>
+<div id="donation" class="section" style="display: none;">
+    <div class="btc-header">
+        <span class="btc-icon">₿</span>
+        <p class="nakamoto-quote">"If you don't believe it or don't get it, I don't have the time to try to convince you, sorry."</p>
     </div>
-
-    <div id="tela-pagamento" class="container-puzzle" style="display: none;">
-        <h2>Escolha a Moeda</h2>
-        <div class="grid-moedas">
-            <button class="btn-moeda" onclick="selecionarMoeda('Bitcoin')">₿ Bitcoin</button>
-            <button class="btn-moeda" onclick="selecionarMoeda('Solana')">◎ Solana</button>
-            <button class="btn-moeda" onclick="selecionarMoeda('Ethereum')">Ξ Ethereum</button>
-            <button class="btn-moeda" onclick="selecionarMoeda('TRX')">💎 TRX</button>
-        </div>
-
-        <div id="box-pagamento" style="display: none; margin-top: 20px; border: 1px solid #f7931a; padding: 15px; border-radius: 8px;">
-            <p>Taxa (1.5%): <strong id="valor-taxa-display" style="color:#f7931a;"></strong> <span id="moeda-simbolo"></span></p>
-            <code id="carteira-exibida" style="font-size: 10px; display: block; margin: 10px 0;">bc1q2zvuafqplffeu5ukfudnuugf3l0l5kc2a8ue6j</code>
-            <button class="btn-lancar" onclick="confirmarELancar()">Confirmar Pagamento</button>
-        </div>
+    
+    <h2>FAÇA UMA DOAÇÃO</h2>
+    <p style="color: #F7931A; font-weight: bold; margin-top: 10px;">Valor Mínimo: 0.0001 BTC</p>
+    <p style="font-size: 12px; color: #888;">Rede: **Bitcoin (Native SegWit)**</p>
+    
+    <button class="btn-donate" onclick="toggleQR()" style="margin-top: 20px;">GERAR QR CODE BTC</button>
+    
+    <div id="qr-container" style="display:none; margin-top: 20px;">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bc1qn3y2h7yy8cw9kzw7ycf9tsnrmmuegyn5uurerx" alt="QR BTC">
+        <p class="wallet" style="font-size: 11px; word-break: break-all; color: #F7931A; margin-top: 10px;">
+            bc1qn3y2h7yy8cw9kzw7ycf9tsnrmmuegyn5uurerx
+        </p>
+        <button onclick="confirmDonation()" style="background: #222; color: #fff; margin-top: 15px;">CONFIRMAR ENVIO</button>
     </div>
-
-    <div id="tela-vitrine" class="container-puzzle" style="display: none;">
-        <h2>Vitrine de Puzzles</h2>
-        <div id="lista-puzzles-real"></div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+    <p id="thanks-msg" style="display:none; color:#F7931A; margin-top:20px; font-weight: bold;">
+        Obrigado por doar Bitcoin. Ele será usado em causas nobres. [cite: 2026-01-21]
+    </p>
+</div>
